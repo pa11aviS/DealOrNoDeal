@@ -1,6 +1,6 @@
 
-const puppeteer = require('puppeteer');
-const stringSimilarity = require('string-similarity');
+import puppeteer from 'puppeteer';
+import stringSimilarity from 'string-similarity';
 
 
 const proxyUsername = process.env.PROXY_USERNAME;
@@ -56,10 +56,6 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
   // await page.setExtraHTTPHeaders({
   //   'Accept-Language': 'en-US,en;q=0.9',
   // });
-
-  function getRandomDelay(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
   
   try {
   // Navigate to the URL

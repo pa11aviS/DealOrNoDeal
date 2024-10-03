@@ -1,5 +1,5 @@
 
-const ProductAdvertisingAPIv1 = require('amazon-paapi/SDK/src/index');
+import ProductAdvertisingAPIv1 from 'amazon-paapi/SDK/src/index';
 import scrapeGoogleShopping from '../../utils/googleShopping';
 import pLimit from 'p-limit'; // Import p-limit for concurrency control
 
