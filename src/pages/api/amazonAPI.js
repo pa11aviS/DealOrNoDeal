@@ -7,7 +7,7 @@ import pLimit from 'p-limit'; // Import p-limit for concurrency control
 var defaultClient = ProductAdvertisingAPIv1.ApiClient.instance;
 
 defaultClient.accessKey = process.env.AWS_ACCESS_KEY;
-defaultClient.secretKey = process.env.AWS_SECRET_KEY;
+defaultClient.secretKey = process.env.AWS_SECRET_ACCESS_KEY;
 
 defaultClient.host = 'webservices.amazon.com';
 defaultClient.region = 'us-east-1';
