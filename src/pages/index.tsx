@@ -56,8 +56,12 @@ const HomePage = () => {
       console.log('API Response:', data); // Log the response data for debugging
       setItems(data.items); // Set the items state to the returned data
 
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message); // Set error message if it is an Error instance
+      } else {
+        setError('An unexpected error occurred'); // Fallback error message
+      }
       console.error('Error fetching items:', error);
     } finally {
       setLoading(false);
