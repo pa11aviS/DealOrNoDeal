@@ -56,8 +56,8 @@ const HomePage = () => {
       console.log('API Response:', data); // Log the response data for debugging
       setItems(data.items); // Set the items state to the returned data
 
-    } catch (error) {
-      setError(error);
+    } catch (error: any) {
+      setError(error.message);
       console.error('Error fetching items:', error);
     } finally {
       setLoading(false);
@@ -65,7 +65,7 @@ const HomePage = () => {
     }
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       fetchItems(); // Call fetchItems when Enter is pressed
     }
