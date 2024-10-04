@@ -23,7 +23,7 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
       '--disable-gpu',
       `--proxy-server=http://${proxyHost}:${proxyPort}`,
     ],
-    headless: true, // You can set this to false to see the browser in action (useful for debugging)
+    headless: false, // You can set this to false to see the browser in action (useful for debugging)
   });
 
   const page = await browser.newPage();
