@@ -23,7 +23,7 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
       '--disable-dev-shm-usage',
       '--disable-web-security',
       '--disable-features=IsolateOrigins,site-per-process',
-      `--proxy-server=http://${proxyHost}:${proxyPort}`,
+      // `--proxy-server=http://${proxyHost}:${proxyPort}`,
     ],
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath, // Use chrome-aws-lambda's executable
@@ -38,10 +38,10 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
 
   // await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
-  await page.authenticate({
-    username: proxyUsername,
-    password: proxyPassword,
-  });
+  // await page.authenticate({
+  //   username: proxyUsername,
+  //   password: proxyPassword,
+  // });
 
   // await page.deleteCookie(...(await page.cookies()));
   // const client = await page.target().createCDPSession();
