@@ -59,12 +59,13 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
   await page.setExtraHTTPHeaders({
     'Accept-Language': 'en-US,en;q=0.9',
   });
+  let html;
   
   try {
   // Navigate to the URL
   await page.goto(url, { waitUntil: 'networkidle2'});
 
-  const html = await page.content();
+  html = await page.content();
   console.log('Page HTML:', html);
 
   // await page.waitForTimeout(getRandomDelay(2000,6000)); // Wait for 3 seconds
@@ -231,6 +232,7 @@ await browser.close();
 return productsWithSimilarity;
 } catch (error) {
 await browser.close();
+console.log('Page HTML in error', html);
 console.error(`Error during scraping attempt ${attempt} for "${brand} ${title}":`, error);
 if (attempt === maxRetries) {
   console.error(`Max retries reached for "${brand} ${title}". Returning empty results.`);
