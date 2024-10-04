@@ -1,32 +1,24 @@
 
-import puppeteer from 'puppeteer-core';
+import puppeteer from 'puppeteer';
 import stringSimilarity from 'string-similarity';
-import chromium from 'chrome-aws-lambda';
+// import chromium from 'chrome-aws-lambda';
 
 
-// const proxyUsername = process.env.PROXY_USERNAME;
-// const proxyPassword = process.env.PROXY_PASSWORD;
-// const proxyHost = 'us.smartproxy.com';
-// const proxyPort = 10000;
+const proxyUsername = process.env.PROXY_USERNAME;
+const proxyPassword = process.env.PROXY_PASSWORD;
+const proxyHost = 'us.smartproxy.com';
+const proxyPort = 10000;
 
 async function scrapeGoogleShopping(brand, title, maxRetries=2) {
   const query = encodeURIComponent(`${brand} ${title}`);
   const url = `https://www.google.com/search?tbm=shop&q=${query}`;
 
 for (let attempt = 1; attempt <= maxRetries; attempt++) {
-  browser = await puppeteer.launch({
+  const browser = await puppeteer.launch({
     args: [
-      ...chromium.args,
       '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--single-process',
-      '--disable-dev-shm-usage',
-      '--disable-web-security',
-      '--disable-features=IsolateOrigins,site-per-process',
-      // `--proxy-server=http://${proxyHost}:${proxyPort}`,
+      `--proxy-server=http://${proxyHost}:${proxyPort}`,
     ],
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath, // Use chrome-aws-lambda's executable
     headless: true, // You can set this to false to see the browser in action (useful for debugging)
   });
 
@@ -38,10 +30,10 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
 
   // await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
-  // await page.authenticate({
-  //   username: proxyUsername,
-  //   password: proxyPassword,
-  // });
+  await page.authenticate({
+    username: proxyUsername,
+    password: proxyPassword,
+  });
 
   // await page.deleteCookie(...(await page.cookies()));
   // const client = await page.target().createCDPSession();
