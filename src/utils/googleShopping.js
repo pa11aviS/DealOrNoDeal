@@ -1,6 +1,7 @@
 
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import stringSimilarity from 'string-similarity';
+import chromium from 'chrome-aws-lambda';
 
 
 const proxyUsername = process.env.PROXY_USERNAME;
@@ -13,14 +14,17 @@ async function scrapeGoogleShopping(brand, title, maxRetries=2) {
   const url = `https://www.google.com/search?tbm=shop&q=${query}`;
 
 for (let attempt = 1; attempt <= maxRetries; attempt++) {
-  const browser = await puppeteer.launch({
-    headless: true,
+  browser = await puppeteer.launch({
     args: [
+      ...chromium.args,
       `--proxy-server=http://${proxyHost}:${proxyPort}`,
-      // '--no-sandbox',
-      // '--disable-setuid-sandbox',
-      // '--disable-dev-shm-usage',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
     ],
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath, // Use chrome-aws-lambda's executable
+    headless: true, // You can set this to false to see the browser in action (useful for debugging)
   });
 
   const page = await browser.newPage();
