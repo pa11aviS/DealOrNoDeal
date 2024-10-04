@@ -17,10 +17,13 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
   browser = await puppeteer.launch({
     args: [
       ...chromium.args,
-      `--proxy-server=http://${proxyHost}:${proxyPort}`,
       '--no-sandbox',
       '--disable-setuid-sandbox',
+      '--single-process',
       '--disable-dev-shm-usage',
+      '--disable-web-security',
+      '--disable-features=IsolateOrigins,site-per-process',
+      `--proxy-server=http://${proxyHost}:${proxyPort}`,
     ],
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath, // Use chrome-aws-lambda's executable
