@@ -1,6 +1,7 @@
 
 import puppeteer from 'puppeteer';
 import stringSimilarity from 'string-similarity';
+// import chromium from 'chrome-aws-lambda';
 
 
 const proxyUsername = process.env.PROXY_USERNAME;
@@ -14,20 +15,22 @@ async function scrapeGoogleShopping(brand, title, maxRetries=2) {
 
 for (let attempt = 1; attempt <= maxRetries; attempt++) {
   const browser = await puppeteer.launch({
-    headless: true,
     args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu',
       `--proxy-server=http://${proxyHost}:${proxyPort}`,
-      // '--no-sandbox',
-      // '--disable-setuid-sandbox',
-      // '--disable-dev-shm-usage',
     ],
+    headless: true, // You can set this to false to see the browser in action (useful for debugging)
   });
 
   const page = await browser.newPage();
 
-  // await page.setExtraHTTPHeaders({
-  //   referer: 'https://www.google.com', // Set your desired referrer
-  // });
+  await page.setExtraHTTPHeaders({
+    referer: 'https://www.google.com', // Set your desired referrer
+  });
 
   // await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
 
@@ -43,27 +46,30 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
 
 //   await page.setGeolocation({ latitude: 37.7749, longitude: -122.4194, accuracy: 100 });
 
-  // await page.emulate({
-  //   viewport: {
-  //     width: 1280,
-  //     height: 800,
-  //   },
-  //   userAgent:
-  //     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)' +
-  //     ' Chrome/91.0.4472.124 Safari/537.36',
-  // });
+  await page.emulate({
+    viewport: {
+      width: 1280,
+      height: 800,
+    },
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)' +
+      ' Chrome/91.0.4472.124 Safari/537.36',
+  });
 
-  // await page.setExtraHTTPHeaders({
-  //   'Accept-Language': 'en-US,en;q=0.9',
-  // });
+  await page.setExtraHTTPHeaders({
+    'Accept-Language': 'en-US,en;q=0.9',
+  });
   
   try {
   // Navigate to the URL
   await page.goto(url, { waitUntil: 'networkidle2'});
 
+  const html = await page.content();
+  console.log('Page HTML:', html);
+
   // await page.waitForTimeout(getRandomDelay(2000,6000)); // Wait for 3 seconds
 
-  await page.waitForSelector('g-inner-card', { timeout: 20000 });
+  await page.waitForSelector('g-inner-card', { timeout: 30000 });
 
   await page.evaluate(() => window.scrollBy(0, window.innerHeight));
 
