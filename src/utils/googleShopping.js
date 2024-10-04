@@ -17,6 +17,10 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
   const browser = await puppeteer.launch({
     args: [
       '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--disable-gpu',
       `--proxy-server=http://${proxyHost}:${proxyPort}`,
     ],
     headless: true, // You can set this to false to see the browser in action (useful for debugging)
