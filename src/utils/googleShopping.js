@@ -4,10 +4,10 @@ import stringSimilarity from 'string-similarity';
 import chromium from 'chrome-aws-lambda';
 
 
-const proxyUsername = process.env.PROXY_USERNAME;
-const proxyPassword = process.env.PROXY_PASSWORD;
-const proxyHost = 'us.smartproxy.com';
-const proxyPort = 10000;
+// const proxyUsername = process.env.PROXY_USERNAME;
+// const proxyPassword = process.env.PROXY_PASSWORD;
+// const proxyHost = 'us.smartproxy.com';
+// const proxyPort = 10000;
 
 async function scrapeGoogleShopping(brand, title, maxRetries=2) {
   const query = encodeURIComponent(`${brand} ${title}`);
