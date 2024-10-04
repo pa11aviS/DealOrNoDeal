@@ -92,6 +92,8 @@ export default async function handler(req, res) {
               item.Title
             );
 
+            console.log('google shopping results', googleShoppingResults)
+
 
             return { ...item, googleShoppingResults};
           } catch (error) {
