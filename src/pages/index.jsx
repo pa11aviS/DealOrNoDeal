@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const HomePage = () => {
   const [keyword, setKeyword] = useState('');
   const [items, setItems] = useState([]);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [ranfunction, setRanfunction] = useState(false);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
