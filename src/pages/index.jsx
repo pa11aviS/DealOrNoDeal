@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const HomePage = () => {
   const [keyword, setKeyword] = useState('');
   const [items, setItems] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [ranfunction, setRanfunction] = useState(false);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
@@ -57,11 +57,7 @@ const HomePage = () => {
       setItems(data.items); // Set the items state to the returned data
 
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(error.message); // Set error message if it is an Error instance
-      } else {
-        setError('An unexpected error occurred'); // Fallback error message
-      }
+      setError(error.message);
       console.error('Error fetching items:', error);
     } finally {
       setLoading(false);
