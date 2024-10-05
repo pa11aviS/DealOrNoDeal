@@ -227,7 +227,6 @@ await browser.close();
 return productsWithSimilarity;
 } catch (error) {
 await browser.close();
-console.log('Page HTML in error', html);
 console.error(`Error during scraping attempt ${attempt} for "${brand} ${title}":`, error);
 if (attempt === maxRetries) {
   console.error(`Max retries reached for "${brand} ${title}". Returning empty results.`);
