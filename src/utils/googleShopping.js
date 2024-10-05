@@ -1,7 +1,11 @@
 
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
+import stringSimilarity from 'string-similarity';
 import stringSimilarity from 'string-similarity';
 // import chromium from 'chrome-aws-lambda';
+
+puppeteer.use(StealthPlugin());
 
 
 const proxyUsername = process.env.PROXY_USERNAME;
