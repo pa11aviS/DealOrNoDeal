@@ -46,16 +46,16 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
 
 //   await page.setGeolocation({ latitude: 37.7749, longitude: -122.4194, accuracy: 100 });
 
-  await page.emulate({
-    viewport: {
-      width: 1280,
-      height: 800,
-    }
-  });
+  // await page.emulate({
+  //   viewport: {
+  //     width: 1280,
+  //     height: 800,
+  //   }
+  // });
 
-  await page.setExtraHTTPHeaders({
-    'Accept-Language': 'en-US,en;q=0.9',
-  });
+  // await page.setExtraHTTPHeaders({
+  //   'Accept-Language': 'en-US,en;q=0.9',
+  // });
   
   try {
   // Navigate to the URL
