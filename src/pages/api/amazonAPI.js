@@ -106,7 +106,7 @@ export default async function handler(req, res) {
       res.status(200).json({ items: itemsWithGoogleData });
 
       // Return all fetched items across multiple pages
-      // res.status(200).json({ items });
+      res.status(200).json({ items });
     } catch (error) {
       console.error('Error calling PA-API 5.0:', error);
       res.status(500).json({ error: 'Failed to fetch data from Amazon API' });
