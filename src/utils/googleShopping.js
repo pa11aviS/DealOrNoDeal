@@ -7,7 +7,7 @@ import stringSimilarity from 'string-similarity';
 const proxyUsername = process.env.PROXY_USERNAME;
 const proxyPassword = process.env.PROXY_PASSWORD;
 const proxyHost = 'us.smartproxy.com';
-const proxyPort = 10002;
+const proxyPort = 10000;
 
 async function scrapeGoogleShopping(brand, title, maxRetries=2) {
   const query = encodeURIComponent(`${brand} ${title}`);
@@ -18,12 +18,13 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
-      // '--disable-dev-shm-usage',
+      '--disable-dev-shm-usage',
       // '--disable-accelerated-2d-canvas',
       '--disable-gpu',
       `--proxy-server=http://${proxyHost}:${proxyPort}`,
     ],
-    headless: true, // You can set this to false to see the browser in action (useful for debugging)
+    headless: true,
+    timeout: 60000, // You can set this to false to see the browser in action (useful for debugging)
   });
 
   const page = await browser.newPage();
@@ -61,7 +62,7 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
   // Navigate to the URL
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
   await delay(2000); // Wait for 2 seconds
-  
+
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000});
 
   // await page.waitForTimeout(getRandomDelay(2000,6000)); // Wait for 3 seconds
