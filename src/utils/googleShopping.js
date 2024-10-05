@@ -59,7 +59,9 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
   
   try {
   // Navigate to the URL
-  await page.waitForTimeout(2000);
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  await delay(2000); // Wait for 2 seconds
+  
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000});
 
   // await page.waitForTimeout(getRandomDelay(2000,6000)); // Wait for 3 seconds
