@@ -7,7 +7,7 @@ import stringSimilarity from 'string-similarity';
 const proxyUsername = process.env.PROXY_USERNAME;
 const proxyPassword = process.env.PROXY_PASSWORD;
 const proxyHost = 'us.smartproxy.com';
-const proxyPort = 10001;
+const proxyPort = 10002;
 
 async function scrapeGoogleShopping(brand, title, maxRetries=2) {
   const query = encodeURIComponent(`${brand} ${title}`);
@@ -18,7 +18,7 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
+      // '--disable-dev-shm-usage',
       '--disable-accelerated-2d-canvas',
       '--disable-gpu',
       `--proxy-server=http://${proxyHost}:${proxyPort}`,
