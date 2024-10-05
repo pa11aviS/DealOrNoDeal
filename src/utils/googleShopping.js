@@ -59,11 +59,11 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
   
   try {
   // Navigate to the URL
-  await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000});
+  await page.goto(url, { waitUntil: 'networkidle2', timeout: 50000});
 
   // await page.waitForTimeout(getRandomDelay(2000,6000)); // Wait for 3 seconds
 
-  await page.waitForSelector('g-inner-card', 20000);
+  await page.waitForSelector('g-inner-card', 30000);
 
   // page.setDefaultTimeout(30000);
 
