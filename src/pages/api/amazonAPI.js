@@ -69,18 +69,6 @@ export default async function handler(req, res) {
 
           items.sort((a,b) => b.Savings - a.Savings);
 
-      // const itemsWithGoogleData = await Promise.all(
-      //   items.map(async (item) => {
-      //     try {
-      //       const googleShoppingResults = await scrapeGoogleShopping(item.Brand, item.Title);
-      //       return { ...item, googleShoppingResults };
-      //     } catch (error) {
-      //       console.error(`Error scraping Google Shopping for ${item.Title}:`, error);
-      //       return { ...item, googleShoppingResults: null }; // or [] if you prefer
-      //     }
-      //   })
-      // );
-
       // Implement concurrency in Google scraper with p-limit
       const limit = pLimit(10); // Adjust the concurrency limit as needed
 
