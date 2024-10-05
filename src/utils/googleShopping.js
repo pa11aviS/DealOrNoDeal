@@ -63,7 +63,7 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
 
   // await page.waitForTimeout(getRandomDelay(2000,6000)); // Wait for 3 seconds
 
-  await page.waitForSelector('g-inner-card', 40000);
+  await page.waitForSelector('g-inner-card', 20000);
 
   // page.setDefaultTimeout(30000);
 
