@@ -19,7 +19,7 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
       '--no-sandbox',
       '--disable-setuid-sandbox',
       // '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
+      // '--disable-accelerated-2d-canvas',
       '--disable-gpu',
       `--proxy-server=http://${proxyHost}:${proxyPort}`,
     ],
@@ -59,7 +59,8 @@ for (let attempt = 1; attempt <= maxRetries; attempt++) {
   
   try {
   // Navigate to the URL
-  await page.goto(url, { waitUntil: 'networkidle2', timeout: 50000});
+  await page.waitForTimeout(2000);
+  await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000});
 
   // await page.waitForTimeout(getRandomDelay(2000,6000)); // Wait for 3 seconds
 
